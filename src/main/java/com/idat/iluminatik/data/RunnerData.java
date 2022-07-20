@@ -68,7 +68,7 @@ public class RunnerData implements CommandLineRunner {
         product.setBrandName("Polo PIQUE");
         product.setColor("Verde");
         product.setStock(100);
-        product.setSize("L");
+        product.setSize("large");
         productoService.createProducto(product);
 
         Product product2 = new Product();
@@ -78,7 +78,7 @@ public class RunnerData implements CommandLineRunner {
         product2.setBrandName("J&J");
         product2.setColor("Blanco");
         product2.setStock(150);
-        product2.setSize("M");
+        product2.setSize("medium");
         productoService.createProducto(product2);
 
         Ventas ventas = new Ventas();
