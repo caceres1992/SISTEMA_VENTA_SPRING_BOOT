@@ -22,6 +22,7 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     public void saveCliente(Cliente cliente) {
+
         clienteRepository.save(cliente);
     }
 
@@ -69,5 +70,12 @@ public class ClienteServiceImpl implements IClienteService {
         }
         return null;
     }
+
+    @Override
+    public boolean existClientByDni(String dni) {
+        return clienteRepository.existsByDni(dni);
+    }
+
+
 }
 

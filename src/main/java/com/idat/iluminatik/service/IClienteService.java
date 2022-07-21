@@ -13,4 +13,7 @@ public interface IClienteService {
     void disableCliente(Long idCliente);
 
     Cliente findClientByDni(String rucOrDni);
+
+    boolean existClientByDni(String dni);
+
 }

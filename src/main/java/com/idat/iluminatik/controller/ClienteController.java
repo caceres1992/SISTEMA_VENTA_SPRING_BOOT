@@ -39,13 +39,18 @@ public class ClienteController {
     }
     @PostMapping
     public ResponseEntity<String> createCliente(@RequestBody Cliente cliente){
-        if(cliente.equals(null))
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if(clienteService.existClientByDni(cliente.getDni()))
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         clienteService.saveCliente(cliente);
         return new ResponseEntity<>("Successful ".concat(cliente.getName()),HttpStatus.CREATED);
     }
     @PutMapping(path = "/update/{idCliente}")
     public ResponseEntity<Cliente> updateClienteById(@RequestBody Cliente cliente,@PathVariable Long idCliente){
+        Cliente _cliente= clienteService.findClienteById(idCliente);
+        if(!_cliente.getDni().equals(cliente.getDni())){
+            if( clienteService.existClientByDni(cliente.getDni()))
+                return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         clienteService.updateCliente(idCliente,cliente);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
