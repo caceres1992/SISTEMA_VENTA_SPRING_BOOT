@@ -13,7 +13,7 @@ public class SaleMapper {
     public static SaleResponse toSaleResponse(Ventas sale) {
         return SaleResponse.builder()
                 .idVenta(sale.getId())
-                .fullNameClient(sale.getCliente().getApellidoPaterno()+" "+sale.getCliente().getApellidoMaterno()+", "+ sale.getCliente().getNombre())
+                .fullNameClient(sale.getCliente().getLastName()+", "+ sale.getCliente().getName())
                 .status(sale.getDespachado())
                 .documentDniClient(sale.getCliente().getDni())
                 .documentRucClient(sale.getCliente().getRuc())

@@ -42,11 +42,10 @@ public class EmpleadoServiceImpl  implements IEmpleadoService {
                 .orElseThrow(() -> new RuntimeException("No Encontramos al empleado"));
 
         _empleado.setCargo(empleado.getCargo());
-        _empleado.setNombre(empleado.getNombre());
-        _empleado.setApellidoMaterno(empleado.getApellidoMaterno());
-        _empleado.setApellidoPaterno(empleado.getApellidoPaterno());
-        _empleado.setCelular(empleado.getCelular());
-        _empleado.setDireccion(empleado.getDireccion());
+        _empleado.setName(empleado.getName());
+        _empleado.setLastName(empleado.getLastName());
+        _empleado.setPhone(empleado.getPhone());
+        _empleado.setAddress(empleado.getAddress());
         _empleado.setEmail(empleado.getEmail());
         _empleado.setDni(empleado.getDni());
         return empleadoRepository.save(_empleado);

@@ -1,13 +1,16 @@
 package com.idat.iluminatik.service.impl;
 
 
+import com.idat.iluminatik.model.ProductoVentas;
 import com.idat.iluminatik.model.Ventas;
 import com.idat.iluminatik.repository.ClienteRepository;
 import com.idat.iluminatik.repository.EmpleadoRepository;
+import com.idat.iluminatik.repository.ProductoVentasRepository;
 import com.idat.iluminatik.repository.VentasRepository;
 import com.idat.iluminatik.service.IVentasService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,8 +23,7 @@ import java.util.List;
 public class VentasServiceImpl implements IVentasService {
 
     private VentasRepository ventasRepository;
-    private ClienteRepository clienteRepository;
-    private EmpleadoRepository empleadoRepository;
+private ProductoVentasRepository productoVentasRepository;
 
     @Override
     public Ventas createVentas(Ventas ventas) {
@@ -61,4 +63,15 @@ public class VentasServiceImpl implements IVentasService {
         ventasRepository.save(_ventas);
         return _ventas;
     }
+
+    @Override
+    public void saleCanceled(Long idVenta) {
+            Ventas ventas = findVentasById(idVenta);
+            ventas.setDespachado(false);
+            ventasRepository.save(ventas);
+
+
+    }
+
+
 }

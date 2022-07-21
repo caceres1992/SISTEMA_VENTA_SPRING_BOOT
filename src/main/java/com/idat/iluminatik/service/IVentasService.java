@@ -1,5 +1,6 @@
 package com.idat.iluminatik.service;
 
+import com.idat.iluminatik.model.ProductoVentas;
 import com.idat.iluminatik.model.Ventas;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface IVentasService {
     List<Ventas> ventas();
     Ventas findVentasById(Long idVentas);
     Ventas updateVentasById(Long idVentas,Ventas ventas);
+    void saleCanceled(Long idVenta);
 }

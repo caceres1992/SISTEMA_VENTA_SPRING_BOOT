@@ -10,11 +10,10 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @Setter
 public class Person extends IdBaseEntity {
-    private String nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
+    private String name;
+    private String lastName;
     private String email;
     private String dni;
-    private String direccion;
-    private String celular;
+    private String address;
+    private String phone;
 }

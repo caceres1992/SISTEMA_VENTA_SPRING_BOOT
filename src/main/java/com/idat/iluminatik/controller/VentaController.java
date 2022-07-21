@@ -4,6 +4,7 @@ package com.idat.iluminatik.controller;
 import com.idat.iluminatik.dto.SaleMapper;
 import com.idat.iluminatik.model.Ventas;
 import com.idat.iluminatik.payload.response.SaleResponse;
+import com.idat.iluminatik.service.IVentasService;
 import com.idat.iluminatik.service.impl.VentasServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class VentaController {
 
 
     @Autowired
-    private VentasServiceImpl ventasService;
+    private IVentasService ventasService;
 
     @GetMapping
     public ResponseEntity<List<SaleResponse>> findAllVentas(){
@@ -34,10 +35,5 @@ public class VentaController {
 
     }
 
-
-    @PostMapping
-    public ResponseEntity<Ventas> createVenta(@RequestBody Ventas ventas){
-        return new ResponseEntity<>(ventasService.createVentas(ventas),HttpStatus.CREATED);
-    }
 
 }

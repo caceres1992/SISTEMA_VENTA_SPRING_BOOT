@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProductoVentasRepository extends JpaRepository<ProductoVentas,Long> {
 
     List<ProductoVentas> findAllByVentasId(Long id);
+
 }

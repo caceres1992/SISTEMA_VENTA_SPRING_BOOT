@@ -42,7 +42,7 @@ public class ClienteController {
         if(cliente.equals(null))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         clienteService.saveCliente(cliente);
-        return new ResponseEntity<>("Successful ".concat(cliente.getNombre()),HttpStatus.CREATED);
+        return new ResponseEntity<>("Successful ".concat(cliente.getName()),HttpStatus.CREATED);
     }
     @PutMapping(path = "/update/{idCliente}")
     public ResponseEntity<Cliente> updateClienteById(@RequestBody Cliente cliente,@PathVariable Long idCliente){

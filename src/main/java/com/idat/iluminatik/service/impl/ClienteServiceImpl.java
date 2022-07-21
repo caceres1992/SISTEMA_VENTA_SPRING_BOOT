@@ -45,12 +45,11 @@ public class ClienteServiceImpl implements IClienteService {
 
         _cliente.setDni(cliente.getDni());
         _cliente.setRuc(cliente.getRuc());
-        _cliente.setCelular(cliente.getCelular());
-        _cliente.setDireccion(cliente.getDireccion());
-        _cliente.setApellidoMaterno(cliente.getApellidoMaterno());
-        _cliente.setApellidoPaterno(cliente.getApellidoPaterno());
+        _cliente.setPhone(cliente.getPhone());
+        _cliente.setAddress(cliente.getAddress());
+        _cliente.setLastName(cliente.getLastName());
         _cliente.setEmail(cliente.getEmail());
-        _cliente.setNombre(cliente.getNombre());
+        _cliente.setName(cliente.getName());
 
         return clienteRepository.save(_cliente);
     }

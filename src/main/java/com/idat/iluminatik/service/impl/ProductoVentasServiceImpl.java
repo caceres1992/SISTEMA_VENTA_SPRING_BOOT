@@ -54,11 +54,12 @@ public class ProductoVentasServiceImpl implements IProductoVentasService {
 //            Encontrar al Vendedor
         Empleado empleadoEncontrado =empleadoService.findEmpleadoById(productoVentas.getIdVendedor());
 
-        Long idProducto= Long.valueOf(1);
+
 
         List<ProductoVentas> productoVentasList =   productoVentas.getRequestProducto().stream().map(e->{
+            log.info("obj:{}",e);
             ProductoVentas _productoVentas = new ProductoVentas();
-            Product productEncontrado = productoRepository.getReferenceById(idProducto);
+            Product productEncontrado = productoService.getProductoById(e.getIdProduct());
             _productoVentas.setProduct(productEncontrado);
             _productoVentas.setPrecio(e.getPrice());
             _productoVentas.setCantidad(e.getStock());
@@ -124,11 +125,22 @@ public class ProductoVentasServiceImpl implements IProductoVentasService {
         return productoVentasRepository.findAll();
     }
     @Override
-    public void deleteProductoOfVentas(Long idProductoVenta){
-        ProductoVentas productoVentas = productoVentasRepository.findById(idProductoVenta).orElseThrow(() -> new RuntimeException("no se encontro productoVenta"));
-        Long idVenta = productoVentas.getVentas().getId();
-        productoService.addCantidadOfProducto(productoVentas.getProduct().getId(),productoVentas.getCantidad());
-        productoVentasRepository.deleteById(idProductoVenta);
-        getPrecioTotalByIdVenta(idVenta);
+    public void deleteProductoOfVentas(Long idVenta){
+            List<ProductoVentas>productoVentasList = productoVentasRepository.findAllByVentasId(idVenta);
+            Ventas venta = ventasService.findVentasById(idVenta);
+            venta.setDespachado(false);
+        for (ProductoVentas p:  productoVentasList) {
+            restoreStockofProduct(p.getProduct().getId(),p.getCantidad());
+        }
+        ventasService.saleCanceled(idVenta);
     }
+
+    public void restoreStockofProduct(Long idProduct,int quantity){
+        Product productFound = productoRepository.getReferenceById(idProduct);
+        productFound.setStock(productFound.getStock()+quantity);
+        productoRepository.save(productFound);
+        log.info("producto vendido: {} y cantidad devuelta:{}", productFound,quantity);
+    }
+
+
 }
